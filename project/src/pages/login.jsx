@@ -1,33 +1,51 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+    console.log(e.target.email.value);
+    console.log(e.target.password.value);
+
     if (!email || !password) {
       setError("Please fill in all fields.");
       return;
+    }
+    try {
+      const res = await axios.post("http://localhost:8080/profile/signin", {
+        email: email,
+        password: password
+      },{
+        withCredentials: true
+      })
+      console.log(res);
+
+      const data = res.data;
+      console.log(res.status);
+
+      if (res.status == 400) {
+        console.log("Already exists");
+        alert("User with this email already exists");
+      }
+      if (res.status == 200) {
+        alert("User logged in succesfully xyzzz");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error is: ", error);
     }
 
     setLoading(true);
     setError("");
 
-    // Simulate a login API call (you can replace this with the real API later)
-    setTimeout(() => {
-      if (email === 'test@example.com' && password === 'password123') {
-        alert("Login successful!");
-        // On success, you can redirect or store JWT token
-      } else {
-        setError("Invalid credentials, please try again.");
-      }
-      setLoading(false);
-    }, 1000); // Simulate network delay
   };
 
   return (
@@ -69,7 +87,7 @@ const Login = () => {
             className={`w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={loading}
           >
-            {loading ? 'Signing In...' : 'Log In'}
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
         </form>
 

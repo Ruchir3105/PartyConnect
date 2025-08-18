@@ -1,13 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Calendar, Search, MapPin, TrendingUp, PartyPopper, Users } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PopularEvents from './components/PopularEvents';
 import Categories from './components/Categories';
 import Footer from './components/Footer';
 import Login from './pages/login';
-import AboutUs from './pages/AboutUs'; 
+import AboutUs from './pages/AboutUs';
 import HowItWorks from './pages/HowitWorks';
 import Pricing from './pages/pricing';
 import Contact from './pages/Contact';
@@ -26,26 +25,31 @@ import EducationPage from './pages/Categories/EducationPage';
 import PhotographyPage from './pages/Categories/PhotographyPage';
 import GamingPage from './pages/Categories/GamingPage';
 import SportsPage from './pages/Categories/SportsPage';
+import Signup from './pages/Signup';
+import CreateEvent from './pages/CreateEvente';
+import BrowseEvents from './pages/BrowseEvents';
+import Registration from './pages/Registration';
 
 
 function App() {
   return (
     <Router>
-      <Routes>
-        {/* Route for home page */}
-        <Route path="/" element={
-    <div className="min-h-screen bg-black">
       <Navbar />
-      <Hero />
-      <Categories />
-      <PopularEvents />
-      <Footer />
-      
-    </div>
-        }/>
-        {/* Route for login page */}
+      <Routes>
+        {/* Home Page */}
+        <Route path="/" element={
+          <div className="min-h-screen bg-black">
+            <Hero />
+            <Categories />
+            <PopularEvents />
+            <Footer />
+          </div>
+        } />
         <Route path="/login" element={<Login />} />
-         {/* Add routes for footer links */}
+        <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/browse-events" element={<BrowseEvents />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -54,8 +58,6 @@ function App() {
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/faqs" element={<FAQs />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/" element={<Categories />} />
         <Route path="/music" element={<MusicPage />} />
         <Route path="/theater" element={<TheaterPage />} />
         <Route path="/food-and-drink" element={<FoodDrinkPage />} />
@@ -66,8 +68,7 @@ function App() {
         <Route path="/photography" element={<PhotographyPage />} />
         <Route path="/gaming" element={<GamingPage />} />
         <Route path="/sports" element={<SportsPage />} />
-        <Route path="*" element={<div>Page Not Found</div>}/>
-
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
