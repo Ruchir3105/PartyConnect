@@ -1,2 +1,1 @@
-# PartyConnect
-Party Connect and event management platform
+PartyConnect is a smart event management platform built with the MERN stack. It enables users to discover and manage events, with features like secure sign-ups, RSVP tracking, and guest management. The platform offers a responsive React.js UI and RESTful APIs powered by Node.js, Express, and MongoDB.
